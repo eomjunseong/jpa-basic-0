@@ -12,23 +12,19 @@ public class JpaMain {
         tx.begin();
 
         try{
-            for (int i = 0; i < 100; i++) {
-                Member member = new Member();
-                member.setUsername("member"+i);
-                member.setAge(i);
-                em.persist(member);
-            }
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
 
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setAge(10);
+            member.changeTeam(team);
+            em.persist(member);
 
-            List<Member> result = em.createQuery("select m from Member m order by m.age desc", Member.class)
-                    .setFirstResult(3)//id 기준 100~1 중에 100,99,98, 재끼고 97 부터 10개 
-                    .setMaxResults(10)
-                    .getResultList();
-            System.out.println(result.size());
-            for (Member member1 : result) {
-                System.out.println(member1);
-
-            }
+            String query ="select m from Member m right join m.team t";
+            List<Member> resultList = em.createQuery(query, Member.class).getResultList();
+            System.out.println(resultList.get(0));
 
 
             tx.commit();//member는 준영속 상태가 되어 name이 바뀐 것이 적용되지 않는다.
