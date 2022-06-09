@@ -22,17 +22,22 @@ public class JpaMain {
             member.setTeam(team);
             member.setType(MemberType.ADMIN);
             em.persist(member);
-
-//            String query ="select m.username,'HELLO', TRUE,m.type from Member m where m.type= hellojpa.MemberType.ADMIN";
-            String query ="select m.username,'HELLO', TRUE,m.type from Member m where m.type= :type";
-            List<Object[]> list = em.createQuery(query)//            String query ="select m.username,'HELLO', TRUE from Member m ";
-                    .setParameter("type",MemberType.ADMIN)
-                    .getResultList();
-            for (Object[] objects : list) {
-                System.out.println(objects[0]);
-                System.out.println(objects[1]);
-                System.out.println(objects[2]);
-                System.out.println(objects[3]);
+/* case
+            String query =
+                    "select " +
+                            "case when m.age<=10 then '학생요금' "+
+                            "     when m.age>=60 then '성인요금' " +
+                            " else '일반요금' end " +
+                            "from Member m";
+            List<String> result = em.createQuery(query, String.class).getResultList();
+            for (String s : result) {
+                System.out.println("s = " + s);
+            }*/
+//coalesce
+            String query = "select coalesce(m.username,'이름없음') from Member m ";
+            List<String> result = em.createQuery(query, String.class).getResultList();
+            for (String s : result) {
+                System.out.println("s = " + s);
             }
 
             tx.commit();//member는 준영속 상태가 되어 name이 바뀐 것이 적용되지 않는다.
