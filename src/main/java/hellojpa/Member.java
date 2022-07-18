@@ -13,6 +13,9 @@ public class Member {
     private String username;
     private int age;
 
+    @OneToOne
+    @JoinColumn(name="loker_id")
+    private Locker locker;
 
 //    @ManyToOne
 //    @JoinColumn(name="TEAM_ID")
