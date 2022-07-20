@@ -1,8 +1,11 @@
 package hellojpa;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
-//@Entity
+@Entity
+@Data
 public class OrderItem {
 
     @Id  @GeneratedValue
@@ -17,27 +20,5 @@ public class OrderItem {
     @JoinColumn(name ="ITEM_ID")
     private Item item;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
 }

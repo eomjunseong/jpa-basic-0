@@ -1,48 +1,22 @@
 package hellojpa;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.Data;
 
-//@Entity
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Data
 public class Item {
 
     @Id @GeneratedValue
+    @Column(name= "ITEM_ID")
     private Long id;
 
     private String name;
     private int price;
-    private int stockAmount;
+    private int stockQuantity;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getStockAmount() {
-        return stockAmount;
-    }
-
-    public void setStockAmount(int stockAmount) {
-        this.stockAmount = stockAmount;
-    }
 }

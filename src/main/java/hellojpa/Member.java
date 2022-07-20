@@ -13,16 +13,19 @@ public class Member {
     private String username;
     private int age;
 
-    @OneToOne
-    @JoinColumn(name="loker_id")
-    private Locker locker;
 
+//    @OneToOne
+//    @JoinColumn(name="loker_id")
+//    private Locker locker;
+
+    @ManyToOne(fetch=FetchType.LAZY)
 //    @ManyToOne
-//    @JoinColumn(name="TEAM_ID")
-//    private Team team;
+    @JoinColumn(name="TEAM_ID")
+    private Team team;
 
-    @Enumerated(EnumType.STRING)
-    private MemberType type;
+//    @Enumerated(EnumType.STRING)
+//    private MemberType type;
+//
 //
 //    public void changeTeam(Team team){
 //        this.team = team;
